@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sandcastle — Capability Exposure Lab</title>
+<style>
+:root{--purple:#7829da;--lav:#f2e9ff;--bg:#faf8fe;--ink:#2c1d40;--muted:#756881;--line:#e8def0;--green:#167c67;--warn:#9c6e26;--red:#a84b5b;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,"Segoe UI",Arial,sans-serif}button,select,textarea,input{font:inherit}button{cursor:pointer}a{color:var(--purple)}.top{background:#fff;border-bottom:1px solid var(--line);padding:13px clamp(16px,3vw,35px);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.brand{font-weight:850;font-size:18px;display:flex;gap:10px;align-items:center}.mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(140deg,#bc76ff,#6420c8);display:grid;place-items:center;color:white}.small{font-size:12px;color:var(--muted)}.tag{background:var(--lav);padding:3px 9px;border-radius:100px;font-weight:700;color:#6938b0;font-size:11px}.layout{display:grid;grid-template-columns:226px minmax(0,1fr);min-height:calc(100vh - 62px)}aside{background:white;border-right:1px solid var(--line);padding:20px 13px}.aside-label{text-transform:uppercase;letter-spacing:.09em;font-size:10px;color:var(--muted);font-weight:850;margin:16px 12px 8px}.nav{display:block;width:100%;background:transparent;border:0;color:#554568;text-align:left;padding:11px 12px;border-radius:9px;font-weight:650}.nav.active,.nav:hover{background:var(--lav);color:#6728b0}.workspace{padding:24px clamp(16px,3vw,38px);max-width:1320px;width:100%;margin:auto}h1{margin:4px 0 7px;font-size:28px;letter-spacing:-.6px}h2{font-size:18px;margin:0 0 8px}h3{font-size:14px;margin:0 0 5px}.sub{color:var(--muted);margin:0 0 20px}.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 3px 12px #34204d08}.controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.field{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:800}.field select{width:100%;border:1px solid #dbceeb;border-radius:9px;background:white;padding:10px;color:var(--ink)}.section-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(250px,1fr);gap:16px;margin-top:16px}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.pill{background:#f5effc;border-radius:20px;padding:3px 9px;font-size:11px;font-weight:750;color:#6940a0}.pill.good{background:#e4f4ed;color:var(--green)}.pill.warn{background:#fff3df;color:var(--warn)}.pill.ghost{background:#eeeaf2;color:#756b7d}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cap{border:1px solid var(--line);border-radius:12px;padding:13px;display:flex;flex-direction:column;gap:7px}.cap h3{margin:0}.cap p{font-size:12px;color:var(--muted);margin:0}.cap strong{font-size:11px;color:#6642a0}.cap button,.btn{border:1px solid #b89adf;background:#fff;color:#622aaa;border-radius:9px;padding:8px 12px;font-weight:750}.btn.primary{background:var(--purple);color:white;border-color:var(--purple)}.btn:disabled{opacity:.45;cursor:not-allowed}.out{padding:12px;border-radius:10px;background:#f7f3fb;color:#54465e;font-size:12px}.space{border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:8px}.space em{display:block;font-style:normal;font-size:12px;color:var(--muted)}.steps{display:flex;gap:6px;flex-wrap:wrap}.step{font-size:11px;padding:6px 10px;border-radius:100px;border:1px solid var(--line);background:white}.step.on{background:#6d33b9;color:white;border-color:#6d33b9}.composer{margin-top:18px}.composer textarea{width:100%;border:1px solid #dccdea;border-radius:9px;padding:10px;resize:vertical;min-height:82px}.example{background:#f8f4fd;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:12px}.footer{margin-top:22px;color:var(--muted);font-size:12px}.unavailable{border-style:dashed;opacity:.82}.list{padding-left:18px;margin:6px 0;color:#6a5d74}.muted{color:var(--muted)}.hidden{display:none!important}
+@media(max-width:1000px){.controls{grid-template-columns:repeat(2,minmax(0,1fr))}.section-grid{grid-template-columns:1fr}}@media(max-width:680px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow:auto;padding:8px}.aside-label{display:none}.nav{min-width:max-content;font-size:12px}.workspace{padding:18px}.cards{grid-template-columns:1fr}.controls{grid-template-columns:1fr 1fr}h1{font-size:23px}}
+</style></head><body>
+<header class="top"><div class="brand"><span class="mark">✦</span>Sandcastle <span class="tag">Capability Lab v0.1</span></div><div class="row"><a href="./v3.html">V3 reference</a><a href="./">Mockup gallery</a></div></header>
+<div class="layout"><aside aria-label="Creator workspace navigation">
+<div class="aside-label">Creator workspace</div>
+<button class="nav active" data-nav="overview">⌂ &nbsp; Project Overview</button>
+<button class="nav" data-nav="series">▣ &nbsp; My Series</button>
+<button class="nav" data-nav="characters">♙ &nbsp; Characters &amp; World</button>
+<button class="nav" data-nav="production">▤ &nbsp; Production</button>
+<button class="nav" data-nav="library">▦ &nbsp; Library</button>
+<div class="aside-label">Accessible everywhere</div>
+<button class="nav" data-nav="assistant">✧ &nbsp; Creative Assistant</button>
+</aside>
+<main class="workspace">
+<div class="row"><span class="tag">Interactive UX design study</span><span class="small">Simulated state only · No account, provider calls or persistent changes</span></div>
+<h1 id="pageTitle">Project Overview</h1>
+<p class="sub" id="pageSubtitle">The interface adapts to what the creator is making and how far they have progressed.</p>
+<div class="panel controls" aria-label="Scenario controls">
+<label class="field">Project mode<select id="mode"><option value="drama">Micro Drama</option><option value="webtoon">Webtoon</option><option value="advideo">Ad Campaign — Video</option><option value="adcomic">Ad Campaign — Comic</option><option value="adstatic">Ad Campaign — Static</option></select></label>
+<label class="field">Workflow stage<select id="stage"><option value="0">0 · Project Start</option><option value="1">1 · Story Development</option><option value="2">2 · Storyboard &amp; Review</option><option value="3">3 · Production</option><option value="4">4 · Finalization</option></select></label>
+<label class="field">UI depth<select id="depth"><option value="easy">Easy (default)</option><option value="details">Details</option></select></label>
+<label class="field">Demo account<select id="plan"><option value="free">Free / core access</option><option value="paid">Paid / Foundry enabled</option></select></label>
+</div>
+<div class="panel">
+<div class="row" style="justify-content:space-between"><div><h2>What should appear now?</h2><div class="small">Mode + stage + format + readiness + plan + UI depth</div></div><span class="pill good" id="stageLabel">Start</span></div>
+<div class="steps" id="steps" style="margin-top:12px"></div>
+<div class="out" style="margin-top:12px" id="summary"></div>
+</div>
+<div class="section-grid">
+<section class="panel"><div class="row" style="justify-content:space-between"><h2 id="capTitle">Relevant capabilities</h2><span id="count" class="pill">0</span></div><div class="cards" id="caps" aria-live="polite"></div></section>
+<section class="panel">
+<h2>Six Creative Spaces</h2><p class="small">Permanent logical foundation. Nested tools appear only in their appropriate context.</p><div id="spaces"></div>
+<div class="example" id="spaceNote"></div>
+</section>
+</div>
+<div class="panel composer" id="assistant"><div class="row" style="justify-content:space-between"><h2>✧ Your Creative Assistant</h2><span class="pill">Context-aware</span></div>
+<p class="small">Try asking for a capability that isn't visible yet. This prototype explains its prerequisites; it does not execute media generation.</p>
+<textarea id="prompt" aria-label="Creative request" placeholder="e.g. Turn the storyboard into clip plans"></textarea>
+<div class="row" style="margin-top:9px"><button class="btn primary" id="ask">Check what Sandcastle would do</button><button class="btn" id="example">Fill example</button><span class="small">Prompt · Attachment reference · Previous version</span></div>
+<div class="out hidden" id="answer" role="status" style="margin-top:12px"></div>
+</div>
+<div class="panel" style="margin-top:16px" id="review"><h2>V3 UI capability mapping</h2><p class="small">This lab preserves the original V3 navigation and overlays staged capabilities rather than adding another studio.</p>
+<div class="out" id="mapping"></div>
+<div class="small" style="margin-top:10px">Status is illustrative and policy-driven. No real backend, auth, licensing, quota or provider readiness is connected.</div></div>
+<p class="footer">Sandcastle V3 remains the primary UI reference. This companion mockup demonstrates exposure policy only. Approval, authorization, licensing and finalized-episode safeguards are never bypassed by visibility settings.</p>
+</main></div>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const names=['Story & Direction','Characters & Outfits','World & Places','Story Flow','Scenes & Composition','Style & Identity'];
+const modes={drama:'Micro Drama',webtoon:'Webtoon',advideo:'Video Ad Campaign',adcomic:'Comic Ad Campaign',adstatic:'Static Ad Campaign'};
+const stages=['Project Start','Story Development','Storyboard & Review','Production','Finalization'];
+const SPACE={
+series:[0,3,4],characters:[1,2,5],production:[4,5],overview:[0,1,2,3,4,5],library:[0,1,2,3,4,5],assistant:[0,1,2,3,4,5]};
+const definitions=[
+{id:'brief',name:'Creative Direction & Presets',stage:0,modes:'all',nav:'series',desc:'Genre, storytelling tradition, setting, tone and visual identity.',action:'Edit creative direction'},
+{id:'character',name:'Character / Voice Profile',stage:1,modes:'all',nav:'characters',desc:'Character identity, outfits, reference voices and reusable appearances.',action:'Develop character'},
+{id:'storyflow',name:'Story Flow & Scenes',stage:1,modes:'all',nav:'series',desc:'Episodes and arcs, or campaign deliverables without artificial episodes.',action:'Develop story flow'},
+{id:'storyboard',name:'Storyboard / Four-panel Review',stage:2,modes:['drama','webtoon','advideo','adcomic'],nav:'series',desc:'Preview, compare and refine story or shot/panel composition.',action:'Review storyboard'},
+{id:'clipplan',name:'Clip Plans',stage:3,modes:['drama','advideo'],nav:'production',desc:'Mode-aware shot timing and source references for video production.',action:'Open clip plans'},
+{id:'video',name:'Video Clip Generation',stage:3,modes:['drama','advideo'],nav:'production',desc:'Generate video clips from ready shot plans and authorized references.',action:'Generate clips'},
+{id:'assembly',name:'Clip Assembly',stage:3,modes:['drama','advideo'],nav:'production',desc:'Review, sequence and edit compatible video clips.',action:'Open assembly'},
+{id:'panels',name:'Panel Extraction & Layout',stage:3,modes:['webtoon','adcomic'],nav:'production',desc:'Convert reviewed compositions into reusable comic panels.',action:'Prepare panels'},
+{id:'balloons',name:'Comic Balloon Generation',stage:3,modes:['webtoon','adcomic'],nav:'production',desc:'Create proposed lettering and dialogue balloons after panels exist.',action:'Generate balloons'},
+{id:'balloonedit',name:'Comic Balloon Editor / Repair',stage:3,modes:['webtoon','adcomic'],nav:'production',foundry:true,desc:'Optional Foundry plugin for advanced lettering repair.',action:'Edit balloons'},
+{id:'static',name:'Static Campaign Asset',stage:3,modes:['adstatic'],nav:'production',desc:'Build static campaign deliverables and channel variants.',action:'Prepare static assets'},
+{id:'publish',name:'Finalize & Publishing Handoff',stage:4,modes:'all',nav:'production',desc:'Review pinned final versions; export or hand off for publishing.',action:'Prepare handoff'}
+];
+const S={mode:'drama',stage:0,depth:'easy',plan:'free',nav:'overview'};
+function allowed(d){return d.modes==='all'||d.modes.includes(S.mode)}
+function status(d){
+if(!allowed(d))return {kind:'notApplicable',label:'Not applicable',reason:'This format normally uses a different production path.'};
+if(d.foundry&&S.plan==='free')return {kind:'locked',label:'Optional Foundry',reason:'An enabled plugin and appropriate entitlement would be required.'};
+if(d.stage>S.stage)return {kind:'future',label:'Assistant discovery',reason:'Prerequisite milestone not reached. Current stage '+stages[S.stage]+'.'};
+return {kind:'ready',label:S.depth==='details'?'Details available':'Easy UI',reason:'Available in this illustrative workflow context; actual execution requires backend checks.'};
+}
+function elem(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
+function render(){
+S.mode=$('mode').value;S.stage=+$('stage').value;S.depth=$('depth').value;S.plan=$('plan').value;
+$('stageLabel').textContent=stages[S.stage];
+$('steps').replaceChildren(...stages.map((s,i)=>elem('span','step'+(i===S.stage?' on':''),s)));
+$('summary').textContent=(modes[S.mode])+' · '+stages[S.stage]+' · '+(S.depth==='easy'?'Simple actions only.':'Advanced settings shown.')+' No production job or publishing action is executed by this demo.';
+const menu={overview:['Project Overview','A calm starting point with a universal creative assistant and recommended next step.'],series:['My Series','Story & Direction, Story Flow and Scenes & Composition live together.'],characters:['Characters & World','Character, Outfit, Voice Profile, Locations, Lore and Visual Identity.'],production:['Production','Only format- and milestone-appropriate tools appear here.'],library:['Library','Browse by Creative Entity (default) or Development Session; same underlying artifacts.'],assistant:['Creative Assistant','Invoke eligible actions conversationally without adding permanent navigation.']};
+$('pageTitle').textContent=menu[S.nav][0];$('pageSubtitle').textContent=menu[S.nav][1];
+document.querySelectorAll('[data-nav]').forEach(n=>n.classList.toggle('active',n.dataset.nav===S.nav));
+const index=(SPACE[S.nav]||SPACE.overview);
+const spaceNames=names.filter((_,i)=>index.includes(i));
+const sp=$('spaces');sp.replaceChildren(...spaceNames.map(x=>{const n=elem('div','space');n.append(elem('strong','',x),elem('em','',x==='Characters & Outfits'?'Voice Profile and outfits are nested, not new spaces.':x==='Scenes & Composition'?'Scene details inherit applicable canon and creative direction.':'Prompt, references and previous version share one editor.'));return n;}));
+$('spaceNote').textContent=S.depth==='details'?'Details: canonical revisions, context, provenance, grants and workflow evidence can be inspected.':'Easy: keep complex canon, provider and production controls out of the way.';
+const visible=definitions.filter(d=>allowed(d)&&((d.stage<=S.stage)||(S.depth==='details'&&d.stage===S.stage+1))&&(S.nav==='overview'||S.nav==='assistant'||S.nav==='library'||d.nav===S.nav));
+const cards=visible.map(d=>{
+const st=status(d),card=elem('article','cap'+(st.kind==='locked'?' unavailable':''));card.append(elem('h3','',d.name),elem('p','',d.desc));
+const row=elem('div','row');row.append(elem('span','pill '+(st.kind==='ready'?'good':st.kind==='locked'?'warn':'ghost'),st.label));card.append(row);
+if(S.depth==='details')card.append(elem('p','',st.reason));
+const b=elem('button','',st.kind==='ready'?d.action:'Explain prerequisites');b.addEventListener('click',()=>showCapability(d));card.append(b);return card;
+});
+$('caps').replaceChildren(...cards);$('count').textContent=cards.length+' shown';
+$('mapping').textContent=S.nav==='overview'?'Project Overview: recommended next action and persistent composer. My Series: narrative tools. Characters & World: canonical assets. Production: context-gated execution. Library: entity-first default with session alternate.':menu[S.nav][0]+': '+spaceNames.join(' · ')+'. '+(S.depth==='details'?'Show advanced controls where relevant.':'Keep technical controls hidden until requested.');
+$('answer').classList.add('hidden');
+}
+function showCapability(d){const st=status(d);$('answer').classList.remove('hidden');$('answer').textContent=st.kind==='ready'?d.name+': Prototype would open '+d.nav+' and perform authorization, quota and artifact readiness checks before any real action.':d.name+': '+st.reason+' A real assistant would explain a safe next step, not claim the action succeeded.';$('assistant').scrollIntoView({behavior:'smooth',block:'nearest'});}
+function infer(text){const q=text.toLowerCase();if(/balloon|lettering|speech bubble/.test(q))return 'balloonedit';if(/clip plan|shot plan/.test(q))return 'clipplan';if(/assembl|join clips|timeline edit/.test(q))return 'assembly';if(/video|animate|generate clip/.test(q))return 'video';if(/panel/.test(q))return 'panels';if(/voice|speak|dialogue audio/.test(q))return 'character';if(/storyboard|four.panel/.test(q))return 'storyboard';if(/publish|export|final/.test(q))return 'publish';if(/style|genre|preset|1980/.test(q))return 'brief';return 'storyflow';}
+$('ask').addEventListener('click',()=>{const q=$('prompt').value.trim();$('answer').classList.remove('hidden');if(!q){$('answer').textContent='Enter a short creative request to see how it would be routed.';return;}const d=definitions.find(x=>x.id===infer(q));const st=status(d);const a=st.kind==='ready'?'In a real app this would route to '+d.nav+'; permissions and prerequisites would be rechecked before execution.':st.kind==='future'?'The assistant would propose the missing milestone first. '+st.reason:st.kind==='locked'?'The assistant would explain the optional Foundry requirement without pushing an unavailable action.':'The assistant would suggest the format-appropriate alternative; it would not invent an episode or clip workflow.';
+$('answer').textContent='Recognized intent: '+d.name+'. '+a+' No AI or media generation occurred.';});
+$('example').addEventListener('click',()=>{$('prompt').value=S.mode==='webtoon'?'Add speech balloons to these panels':S.mode==='adstatic'?'Prepare a static promotional poster':'Turn this storyboard into clip plans';});
+document.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>{S.nav=b.dataset.nav;render();}));
+for(const k of ['mode','stage','depth','plan'])$(k).addEventListener('change',render);
+render();
+})();
+</script></body></html>
