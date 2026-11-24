@@ -122,6 +122,22 @@ textarea.v31-character-field{min-height:100px;resize:vertical}
 .v31-character-check{border-radius:16px;padding:5px 9px;font-size:10px;background:#f1e9f8;color:#715091}
 .v31-character-check.yes{background:#e5f4eb;color:#2a7458}
 @media(max-width:900px){.v31-character-layout{grid-template-columns:1fr}}@media(max-width:560px){.v31-field-grid{grid-template-columns:1fr}.v31-turn-view{height:118px}.v31-turn-silhouette{font-size:27px}}
+
+/* Character/Place library-first cards */
+.v31-library-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin:14px 0}
+.v31-library-item{border:1px solid #e4d7ef;background:white;border-radius:12px;overflow:hidden;text-align:left;cursor:pointer}
+.v31-library-item img{width:100%;height:125px;object-fit:cover}
+.v31-library-item .body{padding:12px;display:grid;gap:6px}
+.v31-library-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.v31-import-list{border:1px solid #ded1ed;padding:12px;border-radius:12px;background:#fbf8ff}
+.v31-import-row{display:flex;gap:12px;justify-content:space-between;align-items:center;border-bottom:1px solid #e5d8ee;padding:9px 0}
+.v31-import-row:last-child{border:0}
+.v31-place-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:15px}
+.v31-place-tile{border:1px solid #e1d5e9;padding:9px;border-radius:11px}
+.v31-place-tile img{width:100%;height:130px;object-fit:cover;border-radius:8px}
+.v31-place-tile .placeholder{height:130px;background:#f0eaf6;border-radius:8px;display:grid;place-items:center;font-size:12px;color:#826a94}
+.v31-place-tile textarea{min-height:95px;width:100%;padding:8px;border-radius:7px;border:1px solid #decfe9}
+@media(max-width:850px){.v31-place-grid{grid-template-columns:1fr}}
 </style>
 </head><body><svg style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><symbol id="ic-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 10 9 5 9-5M3 17l9 5 9-5"/></symbol><symbol id="ic-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v10H3V11Zm6 10v-7h6v7"/></symbol><symbol id="ic-chat" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 1-8 8 9 9 0 0 1-4-.9L3 20l1.8-5A8 8 0 1 1 20 11Z"/></symbol><symbol id="ic-film" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 8h4m-4 8h4m10-8h4m-4 8h4"/></symbol><symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2 20v-2a7 7 0 0 1 14 0v2M17 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v1"/></symbol><symbol id="ic-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 6-5 12 0 18M12 3c5 6 5 12 0 18"/></symbol><symbol id="ic-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m3 18 6-6 4 3 4-5 4 5"/></symbol><symbol id="ic-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol><symbol id="ic-download" viewBox="0 0 24 24"><path d="M12 2v13m-5-5 5 5 5-5M3 17v4h18v-4"/></symbol><symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6m10-6v6M3 10h18"/></symbol><symbol id="ic-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20m-16 5h5"/></symbol><symbol id="ic-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a3 3 0 0 1 5 .5c1.2 2-2.5 2.7-2.5 5M12 18h.01"/></symbol><symbol id="ic-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m9 3-.5 2-2 1-2-.5-2 3 1.5 1.6v2l-1.5 1.5 2 3 2-.4 2 1 .5 2h4l.5-2 2-1 2 .4 2-3-1.5-1.5v-2l1.5-1.6-2-3-2 .5-2-1-.5-2H9Z"/></symbol><symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol><symbol id="ic-wand" viewBox="0 0 24 24"><path d="m4 20 16-16-3-3L1 17l3 3Zm12-10 3 3M5 4l1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2Z"/></symbol><symbol id="ic-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol><symbol id="ic-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol><symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 2 3 6v7c0 5 4 8 9 9 5-1 9-4 9-9V6l-9-4Zm-4 10 3 3 5-6"/></symbol><symbol id="ic-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 17v-5m5 5V8m5 9V5"/></symbol><symbol id="ic-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="5"/><path d="m12 11 9-9m-5 3 3 3m-6 1 3 3"/></symbol><symbol id="ic-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 4 18 4 18 0V5M3 12c0 4 18 4 18 0"/></symbol><symbol id="ic-store" viewBox="0 0 24 24"><path d="M3 9V5h18v4M5 9v12h14V9M2 9h20M9 21v-8h6v8"/></symbol><symbol id="ic-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="15" rx="2"/><path d="M12 18v3m-5 0h10"/></symbol><symbol id="ic-bell" viewBox="0 0 24 24"><path d="M5 17h14l-2-3V9a5 5 0 1 0-10 0v5l-2 3Zm5 3h4"/></symbol><symbol id="ic-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l2-2"/></symbol><symbol id="ic-book" viewBox="0 0 24 24"><path d="M3 4h9a3 3 0 0 1 3 3v14H6a3 3 0 0 1-3-3V4Zm12 3a3 3 0 0 1 3-3h3v14a3 3 0 0 0-3 3h-3"/></symbol><symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="ic-rocket" viewBox="0 0 24 24"><path d="M4 15 9 20l3-5 6-6 3-8-8 3-6 6-3 5Zm0 2-2 5 5-2"/></symbol><symbol id="ic-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol><symbol id="ic-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="ic-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/></symbol></svg>
 <div id="root"></div>
@@ -324,30 +340,66 @@ return v31ProjectIndexState().active?creativeSpacesV31():v31ProjectList();
 }
 
 
-function v31CharacterState(){
-const v=v31init();
-if(!v.characters){
-v.characters={active:'char-aurora',counter:1,records:[
-{id:'char-aurora',name:'Aurora Mariposa',personality:'Curious, guarded and resilient. Values honesty but avoids revealing her own fears.',voice:'Warm medium register; measured, slightly breathy delivery. English and Indonesian.',outfit:'Flutter 3 — casual',portrait:false,turnaround:false,version:1,notes:'',ref:'An adventurous protagonist who hides a personal secret.'}
-]};
+
+function v31SharedEntityCatalog(){
+if(!S.v31SharedEntityCatalog)S.v31SharedEntityCatalog={
+characters:[
+{uid:'c-aurora',owner:'project-aurora',name:'Aurora Mariposa',personality:'Resilient, observant, private about her past.',voice:'Warm midrange voice, deliberate articulation.',outfit:'Flutter 3 — casual',portrait:true,turnaround:true,cover:'romance',assets:['headshot-aurora','turnaround-aurora'],version:2},
+{uid:'c-lyra',owner:'project-realm',name:'Lyra Vale',personality:'Adventurous and protective of others.',voice:'Confident alto, relaxed cadence.',outfit:'Expedition cloak',portrait:true,turnaround:true,cover:'realm',assets:['headshot-lyra','turnaround-lyra'],version:3},
+{uid:'c-sora',owner:'project-campaign',name:'Sora Chen',personality:'Warm, witty and expressive.',voice:'Bright, conversational tone.',outfit:'Studio casual',portrait:true,turnaround:false,cover:'campus',assets:['headshot-sora'],version:1}
+],
+places:[
+{uid:'p-station',owner:'project-aurora',name:'Old Transit Station',overview:'A disused city transit hub.',interior:'Ticket hall, platform and service room.',schematic:'North entrance, west stairs, east platform.',cover:'mystery',assets:['station-overview','station-interior','station-schematic'],version:2},
+{uid:'p-citadel',owner:'project-realm',name:'The Last Citadel',overview:'Mountain fortress and ancient city.',interior:'Grand hall and lower vaults.',schematic:'Keep, courtyard, eastern gate.',cover:'realm',assets:['citadel-overview','citadel-interior','citadel-schematic'],version:3},
+{uid:'p-studio',owner:'project-campaign',name:'Soluna Studio Set',overview:'Modern editorial product studio.',interior:'Backdrop and preparation lounge.',schematic:'Camera bay, dressing room, stage.',cover:'campus',assets:['studio-overview','studio-interior','studio-schematic'],version:1}
+]};return S.v31SharedEntityCatalog;
 }
-return v.characters;
+function v31EntityState(kind){
+const v=v31init(),key=kind==='characters'?'characters':'places';
+if(!v[key]||!v[key].initialized){
+const pid=v31ProjectIndexState().active;
+const existing=v31SharedEntityCatalog()[key].filter(x=>x.owner===pid).map(x=>({...x,id:'original-'+x.uid,sourceId:x.uid,sourceProject:x.owner,assets:[...x.assets],localVersion:x.version}));
+v[key]={initialized:true,active:null,count:0,records:existing};
 }
+return v[key];
+}
+function v31EntityList(kind){
+const s=v31EntityState(kind),isChar=kind==='characters',label=isChar?'Characters & Outfits':'World & Places',v=v31init();
+const items=s.records.map(x=>'<button class="v31-library-item" data-action="v31-entity-open" data-value="'+v31escape(kind+':'+x.id)+'"><img src="'+v31escape(ASSETS[x.cover]||ASSETS.hero)+'" alt="Illustrative reference"><div class="body"><strong>'+v31escape(x.name)+'</strong><span class="v31-muted">'+(x.sourceProject!==v31ProjectIndexState().active?'Imported from another project':'Project reference')+' · v'+x.localVersion+'</span><span class="v31-kpi">'+(isChar?'Character Bible':'Place Bible')+'</span></div></button>').join('');
+const importer=v.importKind===kind?v31EntityImporter(kind):'';
+return '<div class="v31-eyebrow">Project Library</div><h2>'+label+'</h2><p class="v31-muted">Select an existing '+(isChar?'character':'place')+' to open its reference library and edit its design, or create/import one. Imports reuse source artifact identifiers without reuploading files.</p>'+
+'<div class="v31-library-actions"><button class="btn primary" data-action="v31-entity-create" data-value="'+kind+'">＋ Create from scratch</button><button class="btn" data-action="v31-entity-import-open" data-value="'+kind+'">Import from another project</button></div>'+importer+
+(s.records.length?'<div class="v31-library-list">'+items+'</div>':'<div class="v31-empty"><div class="v31-big">▧</div><strong>No '+(isChar?'characters':'places')+' yet</strong><p class="v31-muted">Use Create from scratch or import from an existing project.</p></div>');
+}
+function v31EntityImporter(kind){
+const pid=v31ProjectIndexState().active,cat=v31SharedEntityCatalog()[kind].filter(x=>x.owner!==pid),s=v31EntityState(kind);
+return '<div class="v31-import-list"><div class="row between"><strong>Import from another project</strong><button class="v31-tool" data-action="v31-entity-import-close">Close</button></div><p class="v31-muted">Reuse the selected revision and asset references. The destination project can later refine its assignment independently.</p>'+cat.map(x=>{const name=v31ProjectIndexState().projects.find(p=>p.id===x.owner)?.name||x.owner;const imported=s.records.some(z=>z.sourceId===x.uid);return '<div class="v31-import-row"><div><strong class="small">'+v31escape(x.name)+'</strong><div class="v31-muted">'+v31escape(name)+' · v'+x.version+' · '+x.assets.length+' shared assets</div></div><button class="v31-tool" data-action="v31-entity-import-apply" data-value="'+kind+':'+x.uid+'" '+(imported?'disabled':'')+'>'+(imported?'Already added':'Import')+'</button></div>'}).join('')+'</div>';
+}
+function v31PlaceScreen(){
+const s=v31EntityState('places'),p=s.records.find(x=>x.id===s.active);
+if(!p)return v31EntityList('places');
+return '<button class="v31-project-back" data-action="v31-entity-back" data-value="places">← All places</button><div class="v31-eyebrow">Place Bible · '+(p.sourceProject===v31ProjectIndexState().active?'Project reference':'Imported reference')+'</div><h2>'+v31escape(p.name)+'</h2><p class="v31-muted">Use one place across projects, without reuploading its overview, interior or schematic artifacts.</p>'+
+'<div class="v31-place-grid">'+[['Overview','overview',p.cover],['Interior design','interior',p.cover],['Schematics / layout','schematic',null]].map(([title,key,img])=>'<div class="v31-place-tile"><strong class="small">'+title+'</strong>'+(img?'<img src="'+v31escape(ASSETS[img]||ASSETS.hero)+'" alt="Illustrative place reference">':'<div class="placeholder">Schematic / floor-plan placeholder</div>')+'<label class="v31-label">Description</label><textarea data-v31-place-field="'+key+'">'+v31escape(p[key]||'')+'</textarea><button class="v31-tool" data-action="v31-place-library">Choose from Library</button></div>').join('')+'</div>'+
+'<div class="v31-library-actions"><button class="btn primary" data-action="v31-entity-save" data-value="places">Save local revision</button><button class="btn" data-action="v31-place-variant">Propose alternate layout</button></div><div class="v31-dash"><strong>Linked artifacts</strong><p class="v31-muted">'+p.assets.length+' reusable artifact IDs. Local revision '+p.localVersion+'. The underlying binaries stay in the shared artifact store.</p></div>';
+}
+
+function v31CharacterState(){return v31EntityState('characters')}
 function v31CharacterScreen(source,detail){
-const store=v31CharacterState(),ch=store.records.find(x=>x.id===store.active)||store.records[0];
+const store=v31CharacterState(),ch=store.records.find(x=>x.id===store.active);
+if(!ch)return v31EntityList('characters');
 const portrait=ch.portrait?'<img src="'+ASSETS.romance+'" alt="Illustrative portrait concept, not an approved character likeness">':'<div class="v31-empty" style="padding:16px"><div class="v31-big">◉</div><strong>No headshot yet</strong><p class="v31-muted">Create or attach a portrait concept.</p></div>';
 const turnLabels=['Front','Right','Back','Left'];
 const turnaround='<div class="v31-turn-grid">'+turnLabels.map((name,i)=>'<div class="v31-turn-view"><div class="v31-turn-silhouette">'+(['♟','♟','♟','♟'][i])+'</div><span>'+name+'</span></div>').join('')+'</div>';
 const visualNotice=ch.turnaround?'Four-view layout proposed. Visuals remain schematic placeholders; no true 360-degree model was generated.':'A 360° turnaround means a consistent multi-view reference sheet (front, sides, back), not an actual rotating 3D model.';
 const checks='<div class="v31-character-checks"><span class="v31-character-check '+(ch.portrait?'yes':'')+'">Portrait '+(ch.portrait?'proposed':'needed')+'</span><span class="v31-character-check '+(ch.turnaround?'yes':'')+'">Turnaround '+(ch.turnaround?'proposed':'needed')+'</span><span class="v31-character-check yes">Personality draft</span><span class="v31-character-check yes">Voice profile draft</span></div>';
-return '<div class="v31-character-identity"><div><div class="v31-eyebrow">Character Bible · Independent of series</div><h2 style="margin:4px 0">Characters & Outfits</h2><p class="v31-muted">Build a usable character identity from a portrait, outfit-inclusive turnaround, personality and voice.</p></div><div class="actions"><button class="btn" data-action="v31-character-new">＋ New Character</button></div></div>'+
+return '<button class="v31-project-back" data-action="v31-entity-back" data-value="characters">← All characters</button>'+(v31init().importKind==='characters'?v31EntityImporter('characters'):'')+'<div class="v31-character-identity"><div><div class="v31-eyebrow">Character Bible · Cross-project reuse</div><h2 style="margin:4px 0">Characters & Outfits</h2><p class="v31-muted">Build a usable character identity from a portrait, outfit-inclusive turnaround, personality and voice.</p></div><div class="actions"><button class="btn" data-action="v31-entity-import-open" data-value="characters">Import character / outfits</button></div></div>'+
 '<label class="v31-label">Selected character</label><select class="v31-select" data-v31-character-select>'+store.records.map(p=>'<option value="'+v31escape(p.id)+'" '+(p.id===ch.id?'selected':'')+'>'+v31escape(p.name)+'</option>').join('')+'</select>'+
 checks+
 '<div class="v31-character-layout"><div class="v31-character-tile"><h3>1 · Portrait / Headshot</h3><p class="v31-muted">Establish the face, hair and recognizable character identity.</p><div class="v31-character-photo">'+portrait+'</div><div class="v31-toolrow"><button class="v31-tool" data-action="v31-character-portrait">Propose headshot</button><button class="v31-tool" data-action="v31-character-reference">Reference from Library</button></div></div>'+
 '<div class="v31-character-tile"><h3>2 · 360° Turnaround + Outfit</h3><p class="v31-muted">Full-body front, sides and rear views with a consistent outfit.</p>'+turnaround+'<div class="v31-muted">'+v31escape(visualNotice)+'</div><label class="v31-label">Outfit for turnaround</label><select class="v31-select" data-v31-character-outfit>'+['Flutter 3 — casual','Formal','Action outfit','New outfit concept'].map(x=>'<option value="'+v31escape(x)+'" '+(ch.outfit===x?'selected':'')+'>'+v31escape(x)+'</option>').join('')+'</select><div class="v31-toolrow"><button class="v31-tool" data-action="v31-character-turnaround">Propose turnaround</button><button class="v31-tool" data-action="v31-character-outfit">Refine outfit</button></div></div></div>'+
 '<div class="v31-field-grid"><label><span class="v31-label">Character name</span><input class="v31-character-field" data-v31-character-name value="'+v31escape(ch.name)+'"></label><label><span class="v31-label">Voice identity</span><input class="v31-character-field" data-v31-character-voice value="'+v31escape(ch.voice)+'"></label><label><span class="v31-label">Personality / psychology</span><textarea class="v31-character-field" data-v31-character-personality>'+v31escape(ch.personality)+'</textarea></label><label><span class="v31-label">Creative instructions</span><textarea class="v31-character-field" data-v31-character-notes placeholder="Describe changes to the character, outfit or speech...">'+v31escape(ch.notes)+'</textarea></label></div>'+
 '<div class="v31-toolrow"><button class="btn primary" data-action="v31-character-propose">✦ Propose Character Bible</button><button class="btn" data-action="v31-character-refine">Refine selected element</button></div>'+
-'<div class="v31-result"><strong>Character candidate v'+ch.version+'</strong><p class="v31-muted">Portrait + multi-view outfit references + personality + voice profile are independently versioned parts of one reusable character design. Draft changes are local mockup state, not canon or media generation.</p>'+(detail?'<p class="v31-muted">Details: character entity and outfit/voice identities may each have distinct revision IDs and authorized reference artifacts. A turnaround is an image reference, not a mesh.</p>':'')+'</div>';
+'<div class="v31-result"><strong>Character candidate v'+ch.localVersion+'</strong><p class="v31-muted">Portrait + multi-view outfit references + personality + voice profile are independently versioned parts of one reusable character design. Draft changes are local mockup state, not canon or media generation.</p>'+(detail?'<p class="v31-muted">Details: character entity and outfit/voice identities may each have distinct revision IDs and authorized reference artifacts. A turnaround is an image reference, not a mesh.</p>':'')+'</div>';
 }
 function v31DerivedPanel(v){
 const id=v.panel;
@@ -376,6 +428,8 @@ let rightTitle='Space-specific outcome',rightBody=space.output;
 if(v.panel==='space'&&v.space==='characters'){
 rightTitle='Character Bible';rightBody='Headshot and outfit-inclusive turnaround support reliable character reuse. Personality and Voice Profile remain independent, versioned knowledge.';
 stageContent=v31CharacterScreen(source,v.detail)+detail;
+}else if(v.panel==='space'&&v.space==='world'){
+rightTitle='Place Bible';rightBody='Locations can import their reference overviews, interiors and schematics from other projects, without duplicating media.';stageContent=v31PlaceScreen()+detail;
 }else if(v.panel==='space'){
 const tools=space.tools.map((x,i)=>'<button class="v31-tool" data-action="v31-tool" data-value="'+i+'">'+v31escape(x)+'</button>').join('');
 stageContent='<div class="v31-eyebrow">'+v31escape(space.type)+'</div><h2 style="margin:4px 0">'+v31escape(space.name)+'</h2><p class="small muted">'+v31escape(space.desc)+'</p><div class="v31-toolrow">'+tools+'</div><label class="v31-label">1 · Creative instruction</label><textarea class="v31-textarea" data-v31text="prompt" placeholder="'+v31escape(space.prompt)+'">'+v31escape(v.prompts[v.space]||'')+'</textarea>'+source+'<div class="actions" style="margin-top:14px"><button class="btn primary" data-action="v31-propose">✦ Propose & Use</button><button class="btn" data-action="v31-refine">Refine candidate</button><button class="btn" data-action="v31-sceneonly">Keep in scene only</button></div>'+
@@ -515,14 +569,34 @@ function render(){document.getElementById('root').innerHTML=shell()}
 
 function v31action(act,val,el){
 const v=v31init(),sp=V31_SPACES.find(x=>x.id===v.space)||V31_SPACES[0];
-if(act==='v31-space'){if(!v31ProjectIndexState().active){v31ProjectIndexState().active=v31ProjectIndexState().projects[0].id;}v.space=val;v.panel='space';render();return;}
+if(act==='v31-space'){v.importKind=null;if(!v31ProjectIndexState().active){v31ProjectIndexState().active=v31ProjectIndexState().projects[0].id;}v.space=val;v.panel='space';render();return;}
 if(act==='v31-panel'){if(['clips','assembly'].includes(val)&&v.mode==='webtoon')return;v.panel=val;render();return;}
 
-if(act==='v31-character-new'){const s=v31CharacterState();s.counter++;const id='char-'+s.counter;s.records.push({id,name:'New Character '+s.counter,personality:'',voice:'',outfit:'New outfit concept',portrait:false,turnaround:false,version:1,notes:'',ref:''});s.active=id;render();return;}
-if(act==='v31-character-portrait'){const ch=v31CharacterState().records.find(x=>x.id===v31CharacterState().active);ch.portrait=true;ch.version++;render();return;}
-if(act==='v31-character-turnaround'){const ch=v31CharacterState().records.find(x=>x.id===v31CharacterState().active);ch.turnaround=true;ch.version++;render();return;}
-if(act==='v31-character-outfit'){const ch=v31CharacterState().records.find(x=>x.id===v31CharacterState().active);ch.outfit='New outfit concept';ch.turnaround=false;ch.version++;render();return;}
-if(act==='v31-character-propose'||act==='v31-character-refine'){const ch=v31CharacterState().records.find(x=>x.id===v31CharacterState().active);ch.version++;render();return;}
+
+if(act==='v31-entity-create'){
+const s=v31EntityState(val),v=v31init();s.count++;const id='new-'+val+'-'+s.count;
+const common={id,sourceId:null,sourceProject:v31ProjectIndexState().active,assets:[],localVersion:1,cover:'campus'};
+s.records.push(val==='characters'?{...common,name:'New Character '+s.count,personality:'',voice:'',outfit:'Default outfit',portrait:false,turnaround:false,notes:''}:{...common,name:'New Place '+s.count,overview:'',interior:'',schematic:''});
+s.active=id;v.importKind=null;render();return;
+}
+if(act==='v31-entity-open'){const [kind,id]=String(val).split(':'),s=v31EntityState(kind);if(s.records.some(x=>x.id===id))s.active=id;v.importKind=null;render();return;}
+if(act==='v31-entity-back'){v31EntityState(val).active=null;v.importKind=null;render();return;}
+if(act==='v31-entity-import-open'){v.importKind=val;render();return;}
+if(act==='v31-entity-import-close'){v.importKind=null;render();return;}
+if(act==='v31-entity-import-apply'){
+const [kind,id]=String(val).split(':'),source=v31SharedEntityCatalog()[kind].find(x=>x.uid===id),s=v31EntityState(kind);
+if(!source||source.owner===v31ProjectIndexState().active||s.records.some(x=>x.sourceId===id))return;
+const imported={...source,id:'import-'+source.uid,sourceId:source.uid,sourceProject:source.owner,assets:[...source.assets],localVersion:1,notes:''};
+s.records.push(imported);s.active=imported.id;v.importKind=null;render();return;
+}
+if(act==='v31-entity-save'){const s=v31EntityState(val),x=s.records.find(z=>z.id===s.active);if(x)x.localVersion++;render();return;}
+if(act==='v31-place-variant'){const s=v31EntityState('places'),x=s.records.find(z=>z.id===s.active);if(x)x.localVersion++;render();return;}
+if(act==='v31-place-library'){navigate('Library');return;}
+if(act==='v31-character-new')return v31action('v31-entity-create','characters',el);
+if(act==='v31-character-portrait'){const s=v31CharacterState(),ch=s.records.find(x=>x.id===s.active);if(ch){ch.portrait=true;ch.localVersion++;}render();return;}
+if(act==='v31-character-turnaround'){const s=v31CharacterState(),ch=s.records.find(x=>x.id===s.active);if(ch){ch.turnaround=true;ch.localVersion++;}render();return;}
+if(act==='v31-character-outfit'){const s=v31CharacterState(),ch=s.records.find(x=>x.id===s.active);if(ch){ch.outfit='New outfit concept';ch.turnaround=false;ch.localVersion++;}render();return;}
+if(act==='v31-character-propose'||act==='v31-character-refine'){const s=v31CharacterState(),ch=s.records.find(x=>x.id===s.active);if(ch)ch.localVersion++;render();return;}
 if(act==='v31-character-reference'){navigate('Library');return;}
 if(act==='v31-boards-create'){v.storyboards.push({name:'Storyboard '+(v.storyboards.length+1),desc:'Provisional episode composition and clip planning',version:1});render();return;}
 if(act==='v31-boards-refine'){const x=v.storyboards[Number(val)];if(x)x.version++;render();return;}
@@ -582,11 +656,13 @@ if(act&&(/^(v31-tpl-|v31-select-preset|v31-asset-|v31-template-project)/).test(a
  if(act==='navigate'){if(val==='Works'&&S.space==='creator')v31ProjectIndexState().active=null;if(S.persona==='agency'&&['AI & Providers','Pricing & Plan Builder','Customer Plans','Customers & Memberships','Payments & Billing'].includes(val))return notify('Not available in Agency Studio: AI is included, no BYOK/reseller billing.');return navigate(val);}if(act==='drawer'){S.drawer=!S.drawer;return render()}if(act==='preview-creator')return switchSpace('creator');if(act==='switch-operator')return switchSpace('operator');if(act==='settab'){S[el.dataset.key]=val;return render()}if(act==='set-price-tab'){S.priceTab=val;return render()}if(act==='toggle'){S.features[val]=!S.features[val];render();return notify('Creative products changed in preview only.')}if(act==='brand-color'){S.color=val;return render()}if(act==='format'){S.creatorFormat=val;return render()}if(act==='story-tab'){S.storyTab=val;return render()}if(act==='episode')return notify(`Episode ${val} selected in design preview.`);if(act==='assistant-suggestion')return notify(`${el.dataset.label||'Suggestion'} is a guided UI interaction, not an AI request.`);if(act==='ai-service'){S.service=val;return render()}if(act==='billing-unit'){S.unit=val;if(val==='credits')S.included=1000;else if(S.included>100)S.included=20;return render()}if(act==='product-recipe'){S.product=val;if(val==='webtoon')Object.assign(S,{images:8,videoSeconds:0,audioSeconds:0,scriptRuns:2});if(val==='drama')Object.assign(S,{images:2,videoSeconds:60,audioSeconds:60,scriptRuns:3});if(val==='ads')Object.assign(S,{images:3,videoSeconds:30,audioSeconds:30,scriptRuns:2});return render()}if(act==='reset-pricing'){Object.assign(S,{included:20,scriptRuns:2,images:8,videoSeconds:0,audioSeconds:0,imageCost:.13,videoCost:.08,audioCost:.005,textCost:.03,retry:20,fee:4,margin:45,overhead:0,unit:'episodes',manualPrice:'',product:'webtoon'});return render()}if(act==='publish-plan'){S.published=!S.published;render();return notify(S.published?'Plan marked Published for this mockup only.':'Plan marked Draft for this mockup only.')}if(act==='save-brand'||act==='publish-brand'||act==='save-draft'||act==='save-plan'){render();return notify('Saved in local prototype state only. No server changes.')}if(act==='confirm-topup'){S.managedBalance+=100;S.modal='';render();return notify('Simulated $100 top-up only. No payment processed.')}if(act==='copy-embed'){const text='<script src="https://cdn.sandcastle.example/pricing-widget.js" data-tenant="'+S.domain+'"><'+'/script>';if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>notify('Example embed copied. The URL is not live.')).catch(()=>notify('Clipboard blocked by browser; copy from the text panel.'));else notify('Clipboard unavailable in this browser. Select and copy the example code.');return}if(act==='preset'){S.preset=val;return render()}if(act==='develop-idea')return notify('Guided story development is a visual preview; no AI call made.');if(act==='prompt-inspiration')return notify(`${val} selected for inspiration; no story record created.`);if(act==='message-send')return notify('Message not sent. Interactive prototype only.');if(['new-project-demo','reference-policy','reference-proposal','assignment-demo'].includes(act)){S.modal=act;return render()}if(act==='managed-topup'||act==='style'||act==='customer-pricing'||act==='generate-confirm'||act==='new-series'||act==='new-tenant'||act==='connect-provider'||act==='byok-help'||act==='login-preview'||act==='profile'||act==='language'||act==='help-modal'||act==='new-episode'||act==='world-note'||act==='payment-provider'||act==='invite-team'||act==='invite-customer'||act==='advanced-settings'||act==='asset-upload'||act==='billing-demo'||act==='publish-confirm'||act==='export-confirm'||act==='character-detail'||act==='operator-settings'||act==='invoice-demo'||act==='plan-upgrade'||act==='capacity'||act==='continuity'||act==='feedback'||act==='template-use'||act==='adaptation'||act==='service-outline'||act==='download-report'||act==='education-class'||act==='billing-rules'||act==='managed-fees'){S.modal=act;return render()}if(act==='close-modal'){S.modal='';return render()}return notify('Concept interaction only. No real system changes.')}
 document.addEventListener('click',e=>{let b=e.target.closest('[data-action]');if(!b)return;if(b.classList.contains('overlay')&&e.target!==b)return;const act=b.dataset.action;if(act==='close-modal'&&e.target.closest('[data-dialog]')&&e.target===b)return;e.preventDefault();doAction(act,b.dataset.value,b)});
 document.addEventListener('change',e=>{let el=e.target;
+if(el.hasAttribute('data-v31-place-field')){const s=v31EntityState('places'),p=s.records.find(x=>x.id===s.active);if(p)p[el.dataset.v31PlaceField]=el.value;return;}
 if(el.hasAttribute('data-v31-character-select')){v31CharacterState().active=el.value;render();return;}
 if(el.hasAttribute('data-v31-character-outfit')){const s=v31CharacterState();const ch=s.records.find(x=>x.id===s.active);if(ch){ch.outfit=el.value;ch.turnaround=false;}render();return;}
 if(el.hasAttribute('data-v31-template-search')){v31templateState().search=el.value;render();return;}
 if(el.id==='v31-file'){const l=v31libraryState();const list=Array.from(el.files||[]);for(const f of list){const id='upload-'+Math.random().toString(36).slice(2);const url=URL.createObjectURL(f);const type=f.type.startsWith('image/')?'image':f.type.startsWith('video/')?'video':f.type.startsWith('audio/')?'audio':'document';l.items.unshift({id,name:f.name,type,source:'upload',url,preview:type==='image'?url:'',version:1});l.selected=id;}render();return;}if(el.dataset.v31){const v=v31init();if(el.dataset.v31==='mode')v.mode=el.value;if(el.dataset.v31==='stage')v.stage=Number(el.value);if(el.dataset.v31==='depth')v.detail=el.value==='details';render();return;}if(el.id==='persona')return choosePersona(el.value);if(el.id==='workspace')return switchSpace(el.value);if(el.dataset.input&&['agencyTaskDraft','agencyProject','refUrl','refTranscript','refPurpose','refRights'].includes(el.dataset.input)){S[el.dataset.input]=el.value;return}if(el.dataset.input){const key=el.dataset.input;if(key==='not-used')return;S[key]=el.value;if(key==='brand'||key==='domain'){}render();notify('Updated in local design preview only.');return}if(el.dataset.model){S.model[el.dataset.model]=el.value;notify('Sample model preference changed in preview.');return}if(el.dataset.slide){S[el.dataset.slide]=Number(el.value);render()}});
 document.addEventListener('input',e=>{let el=e.target;
+if(el.hasAttribute('data-v31-place-field')){const s=v31EntityState('places'),p=s.records.find(x=>x.id===s.active);if(p)p[el.dataset.v31PlaceField]=el.value;return;}
 if(el.hasAttribute('data-v31-character-name')||el.hasAttribute('data-v31-character-voice')||el.hasAttribute('data-v31-character-personality')||el.hasAttribute('data-v31-character-notes')){
 const s=v31CharacterState(),ch=s.records.find(x=>x.id===s.active);if(!ch)return;
 const field=el.hasAttribute('data-v31-character-name')?'name':el.hasAttribute('data-v31-character-voice')?'voice':el.hasAttribute('data-v31-character-personality')?'personality':'notes';
