@@ -350,7 +350,8 @@ function v31ProjectIndexState(){
 if(!S.v31Projects)S.v31Projects={active:null,created:0,projects:[
 {id:'project-aurora',name:'Aurora Adventures',mode:'drama',status:'In development',cover:'romance',summary:'Micro Drama · Episodes and reusable character Bibles'},
 {id:'project-realm',name:'The Last Realm',mode:'webtoon',status:'Story development',cover:'realm',summary:'Webtoon · Fantasy series and environments'},
-{id:'project-campaign',name:'Soluna Product Stories',mode:'ad',status:'Creative brief',cover:'campus',summary:'Ad Campaign · Product-driven visual storytelling'}
+{id:'project-campaign',name:'Soluna Product Stories',mode:'ad',status:'Creative brief',cover:'campus',summary:'Ad Campaign · Product-driven visual storytelling'},
+{id:'project-reels',name:'Pocket Stories',mode:'reels',status:'New format',cover:'panel4',summary:'Story Reels · Mobile-first short storytelling'}
 ]};
 return S.v31Projects;
 }
@@ -456,12 +457,13 @@ return '<div class="v31-eyebrow">Optional Foundry plugin</div><h2>'+(splitting?'
 
 function creativeSpacesV31(){
 const v=v31init(),space=V31_SPACES.find(x=>x.id===v.space)||V31_SPACES[0];
-const isVideo=v.mode==='drama'||v.mode==='ad';
+const isVideo=['drama','ad','reels'].includes(v.mode);
+const videoPathLabel=v.mode==='reels'?'Reel Clips → Reel Assembly':v.mode==='drama'?'Video Clips → Video Clip Assembly':'Video Clips → Video Clip Assembly';
 if(v.panel==='storyboards'){v.panel='space';v.space='scene';v.sceneTab='storyboards';}if(!isVideo&&['clips','assembly'].includes(v.panel))v.panel='space';if(isVideo&&['splitter','balloons'].includes(v.panel))v.panel='space';
 const options=(arr,value)=>arr.map(x=>'<option value="'+v31escape(x[0])+'" '+(x[0]===value?'selected':'')+'>'+v31escape(x[1])+'</option>').join('');
 const side=V31_SPACES.map((x,i)=>'<button class="v31-space '+(v.panel==='space'&&v.space===x.id?'selected':'')+'" data-action="v31-space" data-value="'+x.id+'">'+(i+1)+'. '+v31escape(x.name)+'<span>›</span></button>').join('');
 const buttons=V31_SPACES.map((x,i)=>'<button class="v31-level-btn '+(v.panel==='space'&&v.space===x.id?'active':'')+'" data-action="v31-space" data-value="'+x.id+'">'+(i+1)+'. '+v31escape(x.name)+(x.plugin?' · Foundry':'')+'</button>').join('');
-const downstream=V31_EXTRAS.filter(x=>isVideo?!['splitter','balloons'].includes(x.id):!['clips','assembly'].includes(x.id)).map(x=>'<button class="v31-level-btn secondary '+(v.panel===x.id?'active':'')+'" data-action="v31-panel" data-value="'+x.id+'">'+v31escape(x.name)+'</button>').join('');
+const downstream=V31_EXTRAS.filter(x=>isVideo?!['splitter','balloons'].includes(x.id):!['clips','assembly'].includes(x.id)).map(x=>'<button class="v31-level-btn secondary '+(v.panel===x.id?'active':'')+'" data-action="v31-panel" data-value="'+x.id+'">'+v31escape(v.mode==='reels'&&x.id==='clips'?'Reel Clips':v.mode==='reels'&&x.id==='assembly'?'Reel Assembly':x.name)+'</button>').join('');
 const source='<div class="v31-split"><label><span class="v31-label">References / attachment</span><button class="v31-tool" data-action="v31-ref">'+(v.refs?'✓ Reference selected':'＋ Select sample reference')+'</button></label><label><span class="v31-label">Previous version</span><button class="v31-tool" data-action="v31-previous">'+(v.previous?'✓ Revision 1.0 pinned':'＋ Start from prior revision')+'</button></label></div>';
 const result=v.results[v.space];
 const detail=v.detail?'<div class="v31-dash"><strong>Details · traceable data</strong><p class="v31-muted">Project continuity: Light · Revision '+v.version+' · References '+(v.refs?'selected':'none')+' · Base '+(v.previous?'1.0':'none')+'. Episodes, storyboards, clip plans, provider runs and artifact versions are independently traceable.</p></div>':'';
@@ -480,7 +482,7 @@ stageContent='<div class="v31-eyebrow">'+v31escape(space.type)+'</div><h2 style=
 (result?'<div class="v31-result"><div class="v31-eyebrow">Current provisional working baseline</div><strong>'+v31escape(result.title)+'</strong><p class="small">'+v31escape(result.body)+'</p><span class="v31-kpi">Candidate v'+result.version+' · not approved canon</span></div>':'<div class="v31-dash" style="margin-top:12px"><strong class="small">Ready to propose</strong><p class="v31-muted">Proposals become editable working baselines without automatically becoming approved canon.</p></div>')+detail;
 }else if(v.panel==='clips'){
 rightTitle='Generated outputs';rightBody='Video clips derive from storyboard/clip-plan revisions. Going ahead without production leaves this view empty; revisiting planning preserves the work.';
-stageContent='<div class="v31-eyebrow">Micro Drama / Ad Campaign</div><h2>Video Clips</h2><p class="small muted">Each clip is a distinct versioned artifact. Returning to Storyboards & Clip Plans never resets this workspace.</p>'+
+stageContent='<div class="v31-eyebrow">'+(v.mode==='reels'?'Story Reels · Mobile-first':'Micro Drama / Video Ad')+'</div><h2>'+(v.mode==='reels'?'Reel Clips':'Video Clips')+'</h2><p class="small muted">Each clip is a distinct versioned artifact. Returning to Storyboards & Clip Plans never resets this workspace.</p>'+
 (v.clips.length?'<div class="v31-phase-cards">'+v.clips.map((s,i)=>'<div class="v31-phase-card"><h3>'+v31escape(s.name)+'</h3><p>'+v31escape(s.desc)+'</p><span class="v31-kpi">Mock artifact · no actual video</span></div>').join('')+'</div>':'<div class="v31-empty"><div class="v31-big">▷</div><strong>No video clips generated</strong><p class="v31-muted">'+(v.storyboards.length?'Storyboard drafts exist, but no video has been generated.':'Create one or more storyboards and clip plans first. You can still explore this page.')+'</p></div>')+
 '<div class="v31-toolrow"><button class="btn" data-action="v31-open-scene" data-value="storyboards">← Scenes & Composition</button>'+(v.storyboards.length?'<button class="btn primary" data-action="v31-clips-simulate">Simulate clip result</button>':'')+'</div><p class="v31-muted">Actual media generation requires backend capabilities and appropriate approval. This mockup never calls providers.</p>'+detail;
 }
@@ -490,8 +492,8 @@ const notes=(v.panel==='space'?space.examples:[rightBody,'Seven Creative Spaces 
 return '<div class="v31-project-head"><button class="v31-project-back" data-action="v31-project-back">← Works / My Projects</button><span class="v31-kpi">'+v31escape((v31ProjectIndexState().projects.find(p=>p.id===v31ProjectIndexState().active)||{}).name||'Project')+'</span></div>'+head('Production','Seven creative spaces with integrated storyboarding and derived production.')+
 '<div class="v31-hero"><div class="v31-eyebrow">Production</div>'+
 '<div class="v31-level-row" aria-label="Seven Level 1 Works">'+buttons+'</div><div class="v31-level-row">'+downstream+'</div>'+
-'<div class="v31-controls" style="grid-template-columns:1fr 1fr"><label class="v31-label">Project mode<select class="v31-select" data-v31="mode">'+options([['drama','Micro Drama'],['webtoon','Webtoon'],['ad','Ad Campaign']],v.mode)+'</select></label><label class="v31-label">Interface depth<select class="v31-select" data-v31="depth">'+options([['easy','Easy'],['details','Details']],v.detail?'details':'easy')+'</select></label></div></div>'+
-'<div class="v31-grid"><aside class="v31-card"><h3>Level 1 Works</h3><p class="v31-muted">Synchronized with the horizontal navigation above.</p><div class="v31-spaces">'+side+'</div><div class="v31-guide"><strong class="small">Derived production</strong><p class="v31-muted">Scenes & Composition'+(isVideo?' → Video Clips → Video Clip Assembly':' → Image Splitter → Balloon Editor')+'</p></div></aside>'+
+'<div class="v31-controls" style="grid-template-columns:1fr 1fr"><label class="v31-label">Project mode<select class="v31-select" data-v31="mode">'+options([['drama','Micro Drama'],['webtoon','Webtoon'],['ad','Ad Campaign'],['reels','Story Reels']],v.mode)+'</select></label><label class="v31-label">Interface depth<select class="v31-select" data-v31="depth">'+options([['easy','Easy'],['details','Details']],v.detail?'details':'easy')+'</select></label></div></div>'+
+'<div class="v31-grid"><aside class="v31-card"><h3>Level 1 Works</h3><p class="v31-muted">Synchronized with the horizontal navigation above.</p><div class="v31-spaces">'+side+'</div><div class="v31-guide"><strong class="small">Derived production</strong><p class="v31-muted">Scenes & Composition'+(isVideo?' → '+videoPathLabel:' → Image Splitter → Balloon Editor')+'</p></div></aside>'+
 '<section class="v31-card">'+stageContent+'</section>'+
 '<aside class="v31-right">'+v31AssistantPanel('works')+'<div class="v31-card" style="margin-top:12px"><h3>Knowledge & tools</h3><div class="v31-list">'+notes+'</div><div class="v31-guide"><strong>'+v31escape(rightTitle)+'</strong><p class="v31-muted">'+v31escape(rightBody)+'</p></div><div class="v31-guide"><strong>Generation traceability</strong><p class="v31-muted">Details shows the planned relationships between episode, dialogue, storyboard, clip plan, generation run and final media. No provider calls in this mockup.</p></div></div></aside></div>';
 }
@@ -662,7 +664,7 @@ if(act==='v31-tpl-works'){navigate('Works');return;}
 if(act==='v31-template-project'){
 const n=Number(val),tpl=V31_PROJECT_TEMPLATES[n];if(!tpl)return;
 const ps=v31ProjectIndexState();ps.created++;const id='template-project-'+ps.created;
-const mode=/Ad /i.test(tpl[0])?'ad':/Webtoon|Romance|Fantasy/i.test(tpl[0])?'webtoon':'drama';
+const mode=/Ad /i.test(tpl[0])?'ad':/Reels/i.test(tpl[0])?'reels':/Webtoon|Romance|Fantasy/i.test(tpl[0])?'webtoon':'drama';
 ps.projects.unshift({id,name:tpl[0]+' '+ps.created,mode,status:'From template',cover:tpl[1],summary:tpl[2]});
 ps.active=id;S.v31={space:'story',panel:'space',mode,detail:false,stage:0,refs:false,previous:false,version:1,results:{},prompts:{},storyboards:[],clips:[]};navigate('Works');return;
 }
