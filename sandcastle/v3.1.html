@@ -455,6 +455,14 @@ const splitting=v.panel==='splitter',haveImage=(v.webtoonImages||[]).length,have
 return '<div class="v31-eyebrow">Optional Foundry plugin</div><h2>'+(splitting?'Image Splitter':'Balloon Editor')+'</h2><p class="v31-muted">'+(splitting?'Assume four panels per generated image as an initial preset; panel count remains configurable.':'Place balloons on panels, using scene dialogue references.')+'</p><div class="v31-empty"><strong>'+(splitting?(haveImage?'Simulated image input ready':'No generated Webtoon images'):(havePanel?'Simulated panels ready':'No split panels yet'))+'</strong><p class="v31-muted">Plugin not connected: no images are split or edited by this mockup.</p></div><div class="v31-toolrow"><button class="btn" data-action="v31-open-scene" data-value="clipplans">Scenes & Composition</button>'+(splitting&&haveImage?'<button class="btn" data-action="v31-split-demo">Simulate panel manifest</button>':'')+(!splitting&&havePanel?'<button class="btn" data-action="v31-balloon-demo">Simulate balloon draft</button>':'')+'</div>';
 }
 
+
+function v31EntityComparePreview(kind, cover){
+const media=ASSETS[cover]||ASSETS.hero;
+return '<div class="v31-character-tile" style="margin-top:13px"><h3>Before / After · '+kind+'</h3><p class="v31-muted">Illustrative image-to-image comparison component. This is not a generated result.</p>'+
+v31ImageCompare({before:media,after:media,title:kind+' · demonstration',simulated:true,afterFilter:'brightness(1.15) saturate(.85)'})+
+'<p class="v31-muted">Real results will display the source and processed output as separately versioned artifacts, with provenance on request.</p></div>';
+}
+
 function creativeSpacesV31(){
 const v=v31init(),space=V31_SPACES.find(x=>x.id===v.space)||V31_SPACES[0];
 const isVideo=['drama','ad','reels'].includes(v.mode);
@@ -488,6 +496,9 @@ stageContent='<div class="v31-eyebrow">'+(v.mode==='reels'?'Story Reels · Mobil
 }
 if(['splitter','balloons'].includes(v.panel)){rightTitle=v.panel==='splitter'?'Image Splitter':'Balloon Editor';rightBody='Foundry plugin stages for Webtoon outputs.';stageContent=v31FoundryWebtoon(v)+detail;}
 if(['assembly','publishing','external'].includes(v.panel)){const titles={assembly:'Assembly',publishing:'Publishing',external:'External Publishing'};rightTitle=titles[v.panel];rightBody='Dependent downstream workflow, never a new canonical creative space.';stageContent=v31DerivedPanel(v)+detail;}
+if(v.panel==='space'&&v.space==='characters'){const s=v31EntityState('characters'),ch=s.records.find(x=>x.id===s.active);if(ch)stageContent+=v31EntityComparePreview('Character appearance / outfit',ch.cover||'romance');}
+if(v.panel==='space'&&v.space==='world'){const s=v31EntityState('places'),p=s.records.find(x=>x.id===s.active);if(p)stageContent+=v31EntityComparePreview('Place / interior',p.cover||'mystery');}
+if(v.panel==='space'&&v.space==='vehicles')stageContent+=v31EntityComparePreview('Vehicle appearance / finish','realm');
 const notes=(v.panel==='space'?space.examples:[rightBody,'Seven Creative Spaces contribute to scene and storyboard planning','All revisions are traceable']).map(x=>'<div class="v31-listitem"><span class="v31-dot"></span><span>'+v31escape(x)+'</span></div>').join('');
 return '<div class="v31-project-head"><button class="v31-project-back" data-action="v31-project-back">← Works / My Projects</button><span class="v31-kpi">'+v31escape((v31ProjectIndexState().projects.find(p=>p.id===v31ProjectIndexState().active)||{}).name||'Project')+'</span></div>'+head('Production','Seven creative spaces with integrated storyboarding and derived production.')+
 '<div class="v31-hero"><div class="v31-eyebrow">Production</div>'+
