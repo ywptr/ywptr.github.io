@@ -153,6 +153,16 @@ textarea.v31-character-field{min-height:100px;resize:vertical}
 .v31-compare-controls button{background:#faf6ff;border:1px solid #dbcbeb;border-radius:8px;padding:6px 10px;color:#613d89;font-size:11px}
 .v31-compare-empty{padding:18px;text-align:center;border:1px dashed #d8c7e9;border-radius:11px;background:#faf7fd}
 @media(max-width:600px){.v31-compare-stage{aspect-ratio:5/4}}
+
+.v31-story-grid{display:grid;gap:11px}
+.v31-story-panel{border:1px solid #e3d5ec;border-radius:12px;padding:14px;background:#fff}
+.v31-story-panel textarea,.v31-story-panel input{width:100%;padding:10px;border:1px solid #d8c9e8;border-radius:8px;resize:vertical;background:white}
+.v31-story-panel textarea{min-height:75px}
+.v31-episode-row{display:flex;gap:10px;align-items:center;justify-content:space-between;border:1px solid #e5d9ee;border-radius:10px;padding:10px;margin-top:8px}
+.v31-episode-row.selected{background:#faf4ff;border-color:#9661ca}
+.v31-episode-row button{border:1px solid #d9c5e8;border-radius:7px;padding:7px 9px;background:white;color:#663099;font-size:11px}
+.v31-four-panel{width:140px;aspect-ratio:3/4;padding:7px;display:grid;grid-template-columns:1fr 1fr;gap:5px;border:1px solid #bd9fdc;border-radius:8px;background:#faf3ff}
+.v31-four-panel div{background:#ded1ed;border:1px solid #c4afd5;border-radius:5px;display:grid;place-items:center;font-size:10px;color:#62467d}
 </style>
 </head><body><svg style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg"><symbol id="ic-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 10 9 5 9-5M3 17l9 5 9-5"/></symbol><symbol id="ic-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v10H3V11Zm6 10v-7h6v7"/></symbol><symbol id="ic-chat" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 1-8 8 9 9 0 0 1-4-.9L3 20l1.8-5A8 8 0 1 1 20 11Z"/></symbol><symbol id="ic-film" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 8h4m-4 8h4m10-8h4m-4 8h4"/></symbol><symbol id="ic-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M2 20v-2a7 7 0 0 1 14 0v2M17 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 5v1"/></symbol><symbol id="ic-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 6-5 12 0 18M12 3c5 6 5 12 0 18"/></symbol><symbol id="ic-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m3 18 6-6 4 3 4-5 4 5"/></symbol><symbol id="ic-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol><symbol id="ic-download" viewBox="0 0 24 24"><path d="M12 2v13m-5-5 5 5 5-5M3 17v4h18v-4"/></symbol><symbol id="ic-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 2v6m10-6v6M3 10h18"/></symbol><symbol id="ic-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20m-16 5h5"/></symbol><symbol id="ic-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.5 9a3 3 0 0 1 5 .5c1.2 2-2.5 2.7-2.5 5M12 18h.01"/></symbol><symbol id="ic-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m9 3-.5 2-2 1-2-.5-2 3 1.5 1.6v2l-1.5 1.5 2 3 2-.4 2 1 .5 2h4l.5-2 2-1 2 .4 2-3-1.5-1.5v-2l1.5-1.6-2-3-2 .5-2-1-.5-2H9Z"/></symbol><symbol id="ic-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol><symbol id="ic-wand" viewBox="0 0 24 24"><path d="m4 20 16-16-3-3L1 17l3 3Zm12-10 3 3M5 4l1 2 2 1-2 1-1 2-1-2-2-1 2-1 1-2Z"/></symbol><symbol id="ic-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol><symbol id="ic-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol><symbol id="ic-shield" viewBox="0 0 24 24"><path d="M12 2 3 6v7c0 5 4 8 9 9 5-1 9-4 9-9V6l-9-4Zm-4 10 3 3 5-6"/></symbol><symbol id="ic-chart" viewBox="0 0 24 24"><path d="M3 3v18h18M7 17v-5m5 5V8m5 9V5"/></symbol><symbol id="ic-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="5"/><path d="m12 11 9-9m-5 3 3 3m-6 1 3 3"/></symbol><symbol id="ic-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 4 18 4 18 0V5M3 12c0 4 18 4 18 0"/></symbol><symbol id="ic-store" viewBox="0 0 24 24"><path d="M3 9V5h18v4M5 9v12h14V9M2 9h20M9 21v-8h6v8"/></symbol><symbol id="ic-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="15" rx="2"/><path d="M12 18v3m-5 0h10"/></symbol><symbol id="ic-bell" viewBox="0 0 24 24"><path d="M5 17h14l-2-3V9a5 5 0 1 0-10 0v5l-2 3Zm5 3h4"/></symbol><symbol id="ic-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l2-2"/></symbol><symbol id="ic-book" viewBox="0 0 24 24"><path d="M3 4h9a3 3 0 0 1 3 3v14H6a3 3 0 0 1-3-3V4Zm12 3a3 3 0 0 1 3-3h3v14a3 3 0 0 0-3 3h-3"/></symbol><symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol><symbol id="ic-rocket" viewBox="0 0 24 24"><path d="M4 15 9 20l3-5 6-6 3-8-8 3-6 6-3 5Zm0 2-2 5 5-2"/></symbol><symbol id="ic-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol><symbol id="ic-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="ic-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="12" rx="2"/><path d="M8 10V6a4 4 0 0 1 8 0v4"/></symbol></svg>
 <div id="root"></div>
@@ -441,6 +451,32 @@ return '<div class="v31-eyebrow">Shared derived production</div><h2>'+d[0]+'</h2
 '<div class="v31-toolrow"><button class="btn" data-action="v31-panel" data-value="'+(id==='external'?'publishing':id==='publishing'?(isWebtoon?'balloons':'assembly'):'clips')+'">← Previous stage</button></div>'+
 '<p class="v31-muted">This preview does not assemble, publish, or distribute actual media.</p>';
 }
+
+function v31StoryState(){
+const v=v31init();
+if(!v.storyFlow)v.storyFlow={
+preset:'Romance · Cinematic Live Action',
+premise:'A young woman discovers a secret that changes everything she thought she knew.',
+objective:'Develop a compelling serialized story with meaningful character development.',
+selected:null,
+serial:2,
+episodes:[
+{id:'ep-1',title:'Episode 1 — The Contract',summary:'The protagonist agrees to a mysterious arrangement.',dialogue:'',revision:1},
+{id:'ep-2',title:'Episode 2 — Hidden Clues',summary:'A familiar detail challenges her assumptions.',dialogue:'',revision:1}
+]};
+return v.storyFlow;
+}
+function v31StoryFlowScreen(){
+const s=v31StoryState(),ep=s.episodes.find(x=>x.id===s.selected);
+const episodes=s.episodes.map(x=>'<div class="v31-episode-row '+(x.id===s.selected?'selected':'')+'"><div><strong>'+v31escape(x.title)+'</strong><div class="v31-muted">'+v31escape(x.summary||'No summary yet')+' · Revision '+x.revision+'</div></div><div class="v31-toolrow"><button data-action="v31-episode-view" data-value="'+v31escape(x.id)+'">View</button><button data-action="v31-episode-prepare" data-value="'+v31escape(x.id)+'">Prepare →</button></div></div>').join('');
+return '<div class="v31-eyebrow">Story & Flow · One workspace</div><h2>Story & Flow</h2><p class="v31-muted">Set the story direction once, then develop episodes and dialogue without switching creative spaces.</p>'+
+'<div class="v31-story-grid"><section class="v31-story-panel"><h3>1 · Presets</h3><p class="v31-muted">Starting style and narrative presets can come from Templates. Change them without silently modifying approved visual Bibles.</p><input data-v31-story-field="preset" value="'+v31escape(s.preset)+'"><button class="v31-tool" data-action="v31-story-templates">Browse Templates</button></section>'+
+'<section class="v31-story-panel"><h3>2 · Premise</h3><textarea data-v31-story-field="premise">'+v31escape(s.premise)+'</textarea></section>'+
+'<section class="v31-story-panel"><h3>3 · Objective</h3><textarea data-v31-story-field="objective">'+v31escape(s.objective)+'</textarea></section>'+
+'<section class="v31-story-panel"><div class="row between"><h3>4 · Episode List</h3><button class="btn primary" data-action="v31-episode-new">＋ Create New</button></div><p class="v31-muted">Open an episode for editing; Prepare compiles that specific episode inside Scenes & Composition. No media generation is implied.</p>'+episodes+
+(ep?'<div class="v31-story-panel" style="margin-top:12px;background:#faf8fd"><h3>Episode details · '+v31escape(ep.title)+'</h3><label class="v31-label">Title</label><input data-v31-episode-field="title" value="'+v31escape(ep.title)+'"><label class="v31-label">Synopsis / beats</label><textarea data-v31-episode-field="summary">'+v31escape(ep.summary||'')+'</textarea><label class="v31-label">Script / dialogue</label><textarea data-v31-episode-field="dialogue">'+v31escape(ep.dialogue||'')+'</textarea><div class="v31-toolrow"><button class="btn" data-action="v31-episode-save">Save episode revision</button><button class="btn primary" data-action="v31-episode-prepare" data-value="'+v31escape(ep.id)+'">Prepare in Scenes & Composition →</button></div></div>':'')+'</section></div>';
+}
+
 function v31IntegratedScenes(v){
 const tabs=[['scenes','Scenes'],['composition','Composition'],['storyboards','Storyboards'],['clipplans','Clip Plans']];
 v.sceneTab=tabs.some(x=>x[0]===v.sceneTab)?v.sceneTab:'scenes';
@@ -478,7 +514,9 @@ const result=v.results[v.space];
 const detail=v.detail?'<div class="v31-dash"><strong>Details · traceable data</strong><p class="v31-muted">Project continuity: Light · Revision '+v.version+' · References '+(v.refs?'selected':'none')+' · Base '+(v.previous?'1.0':'none')+'. Episodes, storyboards, clip plans, provider runs and artifact versions are independently traceable.</p></div>':'';
 let stageContent='';
 let rightTitle='Space-specific outcome',rightBody=space.output;
-if(v.panel==='space'&&v.space==='characters'){
+if(v.panel==='space'&&v.space==='story'){
+rightTitle='Series & episodes';rightBody='Presets, premise, objective, and an editable episode list share one Story & Flow space.';stageContent=v31StoryFlowScreen()+detail;
+}else if(v.panel==='space'&&v.space==='characters'){
 rightTitle='Character Bible';rightBody='Headshot and outfit-inclusive turnaround support reliable character reuse. Personality and Voice Profile remain independent, versioned knowledge.';
 stageContent=v31CharacterScreen(source,v.detail)+detail;
 }else if(v.panel==='space'&&v.space==='world'){
@@ -628,6 +666,17 @@ function render(){document.getElementById('root').innerHTML=shell()}
 function v31action(act,val,el){
 const v=v31init(),sp=V31_SPACES.find(x=>x.id===v.space)||V31_SPACES[0];
 if(act==='v31-space'){v.importKind=null;if(!v31ProjectIndexState().active){v31ProjectIndexState().active=v31ProjectIndexState().projects[0].id;}v.space=val;v.panel='space';render();return;}
+
+if(act==='v31-story-templates'){navigate('Templates');return;}
+if(act==='v31-episode-new'){const s=v31StoryState();s.serial++;const id='ep-'+s.serial;s.episodes.push({id,title:'Episode '+s.serial,summary:'',dialogue:'',revision:1});s.selected=id;render();return;}
+if(act==='v31-episode-view'){const s=v31StoryState();if(s.episodes.some(x=>x.id===val)){s.selected=val;render();}return;}
+if(act==='v31-episode-save'){const s=v31StoryState(),ep=s.episodes.find(x=>x.id===s.selected);if(ep)ep.revision++;render();return;}
+if(act==='v31-episode-prepare'){
+const s=v31StoryState(),ep=s.episodes.find(x=>x.id===val);if(!ep)return;
+s.selected=val;v.preparedEpisodeId=val;v.sceneTab='scenes';v.space='scene';v.panel='space';
+if(!v.episodePlans)v.episodePlans={};if(!v.episodePlans[val])v.episodePlans[val]={episodeRevision:ep.revision,storyboards:[],ready:false};
+render();return;
+}
 if(act==='v31-scene-tab'){v.space='scene';v.panel='space';v.sceneTab=val;render();return;}
 if(act==='v31-open-scene'){v.space='scene';v.panel='space';v.sceneTab=val||'scenes';render();return;}
 if(act==='v31-webtoon-preview'){if(!v.storyboards.length){notify('Create a storyboard first.');return;}v.webtoonImages=[{id:'demo-image',panels:4}];render();return;}
@@ -733,6 +782,8 @@ if(el.hasAttribute('data-v31-character-outfit')){const s=v31CharacterState();con
 if(el.hasAttribute('data-v31-template-search')){v31templateState().search=el.value;render();return;}
 if(el.id==='v31-file'){const l=v31libraryState();const list=Array.from(el.files||[]);for(const f of list){const id='upload-'+Math.random().toString(36).slice(2);const url=URL.createObjectURL(f);const type=f.type.startsWith('image/')?'image':f.type.startsWith('video/')?'video':f.type.startsWith('audio/')?'audio':'document';l.items.unshift({id,name:f.name,type,source:'upload',url,preview:type==='image'?url:'',version:1});l.selected=id;}render();return;}if(el.dataset.v31){const v=v31init();if(el.dataset.v31==='mode')v.mode=el.value;if(el.dataset.v31==='stage')v.stage=Number(el.value);if(el.dataset.v31==='depth')v.detail=el.value==='details';render();return;}if(el.id==='persona')return choosePersona(el.value);if(el.id==='workspace')return switchSpace(el.value);if(el.dataset.input&&['agencyTaskDraft','agencyProject','refUrl','refTranscript','refPurpose','refRights'].includes(el.dataset.input)){S[el.dataset.input]=el.value;return}if(el.dataset.input){const key=el.dataset.input;if(key==='not-used')return;S[key]=el.value;if(key==='brand'||key==='domain'){}render();notify('Updated in local design preview only.');return}if(el.dataset.model){S.model[el.dataset.model]=el.value;notify('Sample model preference changed in preview.');return}if(el.dataset.slide){S[el.dataset.slide]=Number(el.value);render()}});
 document.addEventListener('input',e=>{let el=e.target;
+if(el.hasAttribute('data-v31-story-field')){v31StoryState()[el.dataset.v31StoryField]=el.value;return;}
+if(el.hasAttribute('data-v31-episode-field')){const s=v31StoryState(),ep=s.episodes.find(x=>x.id===s.selected);if(ep)ep[el.dataset.v31EpisodeField]=el.value;return;}
 if(el.hasAttribute('data-v31-compare-slider')){const stage=el.closest('.v31-compare')?.querySelector('.v31-compare-stage');if(stage)stage.style.setProperty('--compare-position',el.value+'%');return;}
 if(el.hasAttribute('data-v31-place-field')){const s=v31EntityState('places'),p=s.records.find(x=>x.id===s.active);if(p)p[el.dataset.v31PlaceField]=el.value;return;}
 if(el.hasAttribute('data-v31-character-name')||el.hasAttribute('data-v31-character-voice')||el.hasAttribute('data-v31-character-personality')||el.hasAttribute('data-v31-character-notes')){
