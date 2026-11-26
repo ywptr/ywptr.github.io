@@ -477,15 +477,29 @@ return '<div class="v31-eyebrow">Story & Flow · One workspace</div><h2>Story & 
 (ep?'<div class="v31-story-panel" style="margin-top:12px;background:#faf8fd"><h3>Episode details · '+v31escape(ep.title)+'</h3><label class="v31-label">Title</label><input data-v31-episode-field="title" value="'+v31escape(ep.title)+'"><label class="v31-label">Synopsis / beats</label><textarea data-v31-episode-field="summary">'+v31escape(ep.summary||'')+'</textarea><label class="v31-label">Script / dialogue</label><textarea data-v31-episode-field="dialogue">'+v31escape(ep.dialogue||'')+'</textarea><div class="v31-toolrow"><button class="btn" data-action="v31-episode-save">Save episode revision</button><button class="btn primary" data-action="v31-episode-prepare" data-value="'+v31escape(ep.id)+'">Prepare in Scenes & Composition →</button></div></div>':'')+'</section></div>';
 }
 
+
 function v31IntegratedScenes(v){
-const tabs=[['scenes','Scenes'],['composition','Composition'],['storyboards','Storyboards'],['clipplans','Clip Plans']];
+const s=v31StoryState(),ep=s.episodes.find(x=>x.id===v.preparedEpisodeId);
+if(!v.episodePlans)v.episodePlans={};
+const plan=ep?v.episodePlans[ep.id]:null;
+const tabs=[['scenes','Episode Plan'],['composition','Composition'],['storyboards','Storyboards'],['clipplans','Production Plans']];
 v.sceneTab=tabs.some(x=>x[0]===v.sceneTab)?v.sceneTab:'scenes';
 let body='<h3>'+tabs.find(x=>x[0]===v.sceneTab)[1]+'</h3>';
-if(v.sceneTab==='scenes')body+='<p class="v31-muted">Scene actions, dialogue references, characters, locations, and episode beats. Use a scene revision as the source of compositions.</p>';
-if(v.sceneTab==='composition')body+='<p class="v31-muted">Shot framing, staging, camera direction, lighting, and visual consistency. Keep each composition independently versioned.</p>';
-if(v.sceneTab==='storyboards')body+='<p class="v31-muted">One episode can yield one or more storyboards; every storyboard references its scene and composition revisions.</p>'+(v.storyboards.length?'<div class="v31-phase-cards">'+v.storyboards.map((x,i)=>'<div class="v31-phase-card"><strong>'+v31escape(x.name)+'</strong><p>Draft v'+x.version+'</p><button class="v31-tool" data-action="v31-boards-refine" data-value="'+i+'">Refine</button></div>').join('')+'</div>':'<div class="v31-empty">No storyboards yet</div>')+'<button class="btn primary" data-action="v31-boards-create">Propose storyboard draft</button>';
-if(v.sceneTab==='clipplans')body+='<p class="v31-muted">Translate storyboards into '+(v.mode==='webtoon'?'image/panel':'video clip')+' plans; no generated media is assumed.</p>'+(v.storyboards.length?'<div class="v31-phase-cards">'+v.storyboards.map(x=>'<div class="v31-phase-card">'+v31escape(x.name)+' · Plan draft v'+x.version+'</div>').join('')+'</div>':'<div class="v31-empty">Create a storyboard before planning media units</div>')+'<button class="btn" data-action="v31-panel" data-value="clips">Open Media Generation</button>';
-return '<div class="v31-eyebrow">Final Creative Space</div><h2>Scenes & Composition</h2><p class="v31-muted">Four integrated tools; independent version history and provenance underneath.</p><div class="v31-level-row">'+tabs.map(x=>'<button class="v31-level-btn '+(v.sceneTab===x[0]?'active':'')+'" data-action="v31-scene-tab" data-value="'+x[0]+'">'+x[1]+'</button>').join('')+'</div><div class="v31-phase-card" style="margin-top:12px">'+body+'</div>';
+if(!ep)body+='<div class="v31-empty"><strong>No episode selected</strong><p class="v31-muted">Open Story & Flow and click Prepare on an episode. The selected episode will become the source for production planning.</p><button class="btn" data-action="v31-space" data-value="story">Open Story & Flow</button></div>';
+else {
+body+='<p class="v31-muted">Selected: <strong>'+v31escape(ep.title)+'</strong> · Episode revision '+ep.revision+'</p>';
+if(v.sceneTab==='scenes')body+='<p class="v31-muted">The episode plan breaks the script into scene beats, camera/composition requirements and reference selections. Nothing is generated yet.</p>'+
+(plan?.ready?'<div class="v31-result"><strong>Episode plan ready</strong><p>'+v31escape(plan.summary||'')+'</p><span class="v31-kpi">Pinned episode revision '+plan.episodeRevision+'</span></div>':'<div class="v31-empty">Episode plan has not been compiled.</div>')+
+'<button class="btn primary" data-action="v31-build-episode">Build episode plan & storyboard prompts</button>';
+if(v.sceneTab==='composition')body+='<p class="v31-muted">Build composition plans from the pinned episode, character, world, style and vehicle references. Target changes without invalidating unrelated plans.</p><div class="v31-dash">Scene-level composition references are independent of finalized media.</div>';
+if(v.sceneTab==='storyboards')body+='<p class="v31-muted">One storyboard = <strong>one static portrait image with four panels</strong>. One episode may need multiple storyboards. Each storyboard plan has a distinct source prompt and revision.</p>'+
+(plan?.storyboards?.length?'<div class="v31-phase-cards">'+plan.storyboards.map((x,i)=>'<div class="v31-phase-card"><strong>'+v31escape(x.name)+'</strong><div class="v31-storyboard-preview"><div class="v31-four-panel">'+[1,2,3,4].map(n=>'<div>Panel '+n+'</div>').join('')+'</div><div style="flex:1"><strong class="v31-muted">Portrait · 4 panels · draft</strong><p class="v31-muted">'+v31escape(x.prompt)+'</p><span class="v31-kpi">Prompt v'+x.version+'</span></div></div><button class="v31-tool" data-action="v31-board-revise" data-value="'+i+'">Revise prompt</button></div>').join('')+'</div>':'<div class="v31-empty"><strong>No storyboard plans</strong><p class="v31-muted">Prepare the episode to derive one or more four-panel portrait storyboard prompts.</p></div>')+
+'<div class="v31-toolrow"><button class="btn" data-action="v31-build-episode">Rebuild episode plan</button></div>';
+if(v.sceneTab==='clipplans')body+='<p class="v31-muted">Review the planned media units and their source storyboard references. Image, video or audio generation is invoked here within Scenes & Composition, never through a separate destination.</p>'+
+(plan?.storyboards?.length?'<div class="v31-phase-cards">'+plan.storyboards.map(x=>'<div class="v31-phase-card"><strong>'+v31escape(x.name)+'</strong><p class="v31-muted">Four-panel portrait storyboard request · no generated image</p></div>').join('')+'</div>':'<div class="v31-empty">Prepare storyboard plans before generation.</div>')+
+'<div class="v31-toolrow"><button class="btn" data-action="v31-prepare-generation">Review generation request</button></div><p class="v31-muted">Actual provider execution requires approval and a backend. This mockup only prepares traceable prompts.</p>';
+}
+return '<div class="v31-eyebrow">Final Creative Space · Episode Production</div><h2>Scenes & Composition</h2><p class="v31-muted">Prepare the selected episode, its compositions, and one or more four-panel portrait storyboard image requests.</p><div class="v31-level-row">'+tabs.map(x=>'<button class="v31-level-btn '+(v.sceneTab===x[0]?'active':'')+'" data-action="v31-scene-tab" data-value="'+x[0]+'">'+x[1]+'</button>').join('')+'</div><div class="v31-phase-card" style="margin-top:12px">'+body+'</div>';
 }
 function v31FoundryWebtoon(v){
 const splitting=v.panel==='splitter',haveImage=(v.webtoonImages||[]).length,havePanel=(v.webtoonPanels||[]).length;
@@ -503,8 +517,8 @@ v31ImageCompare({before:media,after:media,title:kind+' · demonstration',simulat
 function creativeSpacesV31(){
 const v=v31init(),space=V31_SPACES.find(x=>x.id===v.space)||V31_SPACES[0];
 const isVideo=['drama','ad','reels'].includes(v.mode);
-const videoPathLabel='Media Generation → Media Assembly';
-if(v.panel==='storyboards'){v.panel='space';v.space='scene';v.sceneTab='storyboards';}if(v.mode!=='webtoon'&&['splitter','balloons'].includes(v.panel))v.panel='space';
+const videoPathLabel='Scenes & Composition → Media Assembly';
+if(['storyboards','clips'].includes(v.panel)){v.panel='space';v.space='scene';v.sceneTab=v.sceneTab||'clipplans';}if(v.mode!=='webtoon'&&['splitter','balloons'].includes(v.panel))v.panel='space';
 const options=(arr,value)=>arr.map(x=>'<option value="'+v31escape(x[0])+'" '+(x[0]===value?'selected':'')+'>'+v31escape(x[1])+'</option>').join('');
 const side=V31_SPACES.map((x,i)=>'<button class="v31-space '+(v.panel==='space'&&v.space===x.id?'selected':'')+'" data-action="v31-space" data-value="'+x.id+'">'+(i+1)+'. '+v31escape(x.name)+'<span>›</span></button>').join('');
 const buttons=V31_SPACES.map((x,i)=>'<button class="v31-level-btn '+(v.panel==='space'&&v.space===x.id?'active':'')+'" data-action="v31-space" data-value="'+x.id+'">'+(i+1)+'. '+v31escape(x.name)+(x.plugin?' · Foundry':'')+'</button>').join('');
@@ -527,27 +541,18 @@ rightTitle='Scene production';rightBody='Scenes, composition, storyboard and cli
 const tools=space.tools.map((x,i)=>'<button class="v31-tool" data-action="v31-tool" data-value="'+i+'">'+v31escape(x)+'</button>').join('');
 stageContent='<div class="v31-eyebrow">'+v31escape(space.type)+'</div><h2 style="margin:4px 0">'+v31escape(space.name)+'</h2><p class="small muted">'+v31escape(space.desc)+'</p><div class="v31-toolrow">'+tools+'</div><label class="v31-label">1 · Creative instruction</label><textarea class="v31-textarea" data-v31text="prompt" placeholder="'+v31escape(space.prompt)+'">'+v31escape(v.prompts[v.space]||'')+'</textarea>'+source+'<div class="actions" style="margin-top:14px"><button class="btn primary" data-action="v31-propose">✦ Propose & Use</button><button class="btn" data-action="v31-refine">Refine candidate</button><button class="btn" data-action="v31-sceneonly">Keep in scene only</button></div>'+
 (result?'<div class="v31-result"><div class="v31-eyebrow">Current provisional working baseline</div><strong>'+v31escape(result.title)+'</strong><p class="small">'+v31escape(result.body)+'</p><span class="v31-kpi">Candidate v'+result.version+' · not approved canon</span></div>':'<div class="v31-dash" style="margin-top:12px"><strong class="small">Ready to propose</strong><p class="v31-muted">Proposals become editable working baselines without automatically becoming approved canon.</p></div>')+detail;
-}else if(v.panel==='clips'){
-rightTitle='Media Generation';rightBody='The same media-neutral generation stage accepts versioned scene and clip/panel plans, then exposes image, video, audio or mixed outputs as appropriate.';
-const media=v.mediaOutputs||[];
-const candidateCount=media.length;
-const profile=v.mode==='webtoon'?'Webtoon images & panels':v.mode==='reels'?'Vertical story reels':v.mode==='ad'?'Campaign image/video assets':'Micro Drama clips';
-stageContent='<div class="v31-eyebrow">Shared derived production</div><h2>Media Generation</h2><p class="v31-muted">Mode profile: '+profile+'. An output can be a still image, moving clip, narrated sequence, or other supported medium. Only real generated artifacts count as production results.</p>'+
-(candidateCount?'<div class="v31-phase-cards">'+media.map(x=>'<div class="v31-phase-card"><strong>'+v31escape(x.name)+'</strong><p class="v31-muted">'+v31escape(x.type)+' · '+v31escape(x.status)+'</p></div>').join('')+'</div>':'<div class="v31-empty"><div class="v31-big">▧</div><strong>No generated media</strong><p class="v31-muted">Prepare storyboards and production plans in Scenes & Composition. No media has been generated by this mockup.</p></div>')+
-'<div class="v31-toolrow"><button class="btn" data-action="v31-open-scene" data-value="clipplans">← Scenes & Composition / Plans</button>'+
-(v.storyboards.length?'<button class="btn" data-action="v31-media-plan-preview">Preview production request</button>':'')+'</div><p class="v31-muted">No paid provider calls, synthetic outputs, or automatic media generation.</p>'+detail;
 }
 if(['splitter','balloons'].includes(v.panel)){rightTitle=v.panel==='splitter'?'Image Splitter':'Balloon Editor';rightBody='Foundry plugin stages for Webtoon outputs.';stageContent=v31FoundryWebtoon(v)+detail;}
 if(['assembly','publishing','external'].includes(v.panel)){const titles={assembly:'Media Assembly',publishing:'Publishing',external:'External Publishing'};rightTitle=titles[v.panel];rightBody='Dependent downstream workflow, never a new canonical creative space.';stageContent=v31DerivedPanel(v)+detail;}
 if(v.panel==='space'&&v.space==='characters'){const s=v31EntityState('characters'),ch=s.records.find(x=>x.id===s.active);if(ch)stageContent+=v31EntityComparePreview('Character appearance / outfit',ch.cover||'romance');}
 if(v.panel==='space'&&v.space==='world'){const s=v31EntityState('places'),p=s.records.find(x=>x.id===s.active);if(p)stageContent+=v31EntityComparePreview('Place / interior',p.cover||'mystery');}
 if(v.panel==='space'&&v.space==='vehicles')stageContent+=v31EntityComparePreview('Vehicle appearance / finish','realm');
-const notes=(v.panel==='space'?space.examples:[rightBody,'Seven Creative Spaces contribute to scene and storyboard planning','All revisions are traceable']).map(x=>'<div class="v31-listitem"><span class="v31-dot"></span><span>'+v31escape(x)+'</span></div>').join('');
-return '<div class="v31-project-head"><button class="v31-project-back" data-action="v31-project-back">← Works / My Projects</button><span class="v31-kpi">'+v31escape((v31ProjectIndexState().projects.find(p=>p.id===v31ProjectIndexState().active)||{}).name||'Project')+'</span></div>'+head('Production','Seven creative spaces with integrated storyboarding and derived production.')+
+const notes=(v.panel==='space'?space.examples:[rightBody,'Six Creative Spaces contribute to episode and storyboard planning','All revisions are traceable']).map(x=>'<div class="v31-listitem"><span class="v31-dot"></span><span>'+v31escape(x)+'</span></div>').join('');
+return '<div class="v31-project-head"><button class="v31-project-back" data-action="v31-project-back">← Works / My Projects</button><span class="v31-kpi">'+v31escape((v31ProjectIndexState().projects.find(p=>p.id===v31ProjectIndexState().active)||{}).name||'Project')+'</span></div>'+head('Production','Six Creative Spaces with integrated storyboard preparation and generation.')+
 '<div class="v31-hero"><div class="v31-eyebrow">Production</div>'+
-'<div class="v31-level-row" aria-label="Seven Level 1 Works">'+buttons+'</div><div class="v31-level-row">'+downstream+'</div>'+
+'<div class="v31-level-row" aria-label="Six foundational Creative Spaces">'+buttons+'</div><div class="v31-level-row">'+downstream+'</div>'+
 '<div class="v31-controls" style="grid-template-columns:1fr 1fr"><label class="v31-label">Project mode<select class="v31-select" data-v31="mode">'+options([['drama','Micro Drama'],['webtoon','Webtoon'],['ad','Ad Campaign'],['reels','Story Reels']],v.mode)+'</select></label><label class="v31-label">Interface depth<select class="v31-select" data-v31="depth">'+options([['easy','Easy'],['details','Details']],v.detail?'details':'easy')+'</select></label></div></div>'+
-'<div class="v31-grid"><aside class="v31-card"><h3>Level 1 Works</h3><p class="v31-muted">Synchronized with the horizontal navigation above.</p><div class="v31-spaces">'+side+'</div><div class="v31-guide"><strong class="small">Derived production</strong><p class="v31-muted">Scenes & Composition → Media Generation → Media Assembly'+(v.mode==='webtoon'?' → Image Splitter → Balloon Editor':'')+'</p></div></aside>'+
+'<div class="v31-grid"><aside class="v31-card"><h3>Creative Spaces</h3><p class="v31-muted">Synchronized with the horizontal navigation above.</p><div class="v31-spaces">'+side+'</div><div class="v31-guide"><strong class="small">Derived production</strong><p class="v31-muted">Scenes & Composition → Media Assembly'+(v.mode==='webtoon'?' → Image Splitter → Balloon Editor':'')+'</p></div></aside>'+
 '<section class="v31-card">'+stageContent+'</section>'+
 '<aside class="v31-right">'+v31AssistantPanel('works')+'<div class="v31-card" style="margin-top:12px"><h3>Knowledge & tools</h3><div class="v31-list">'+notes+'</div><div class="v31-guide"><strong>'+v31escape(rightTitle)+'</strong><p class="v31-muted">'+v31escape(rightBody)+'</p></div><div class="v31-guide"><strong>Generation traceability</strong><p class="v31-muted">Details shows the planned relationships between episode, dialogue, storyboard, clip plan, generation run and final media. No provider calls in this mockup.</p></div></div></aside></div>';
 }
@@ -677,12 +682,25 @@ s.selected=val;v.preparedEpisodeId=val;v.sceneTab='scenes';v.space='scene';v.pan
 if(!v.episodePlans)v.episodePlans={};if(!v.episodePlans[val])v.episodePlans[val]={episodeRevision:ep.revision,storyboards:[],ready:false};
 render();return;
 }
+
+if(act==='v31-build-episode'){
+const s=v31StoryState(),ep=s.episodes.find(x=>x.id===v.preparedEpisodeId);if(!ep)return;
+if(!v.episodePlans)v.episodePlans={};
+const plan=v.episodePlans[ep.id]||{storyboards:[]};
+const beats=ep.summary.split(/[.!?]+/).map(x=>x.trim()).filter(Boolean);
+const batches=Math.max(1,Math.ceil(Math.max(1,beats.length)/4));
+plan.ready=true;plan.episodeRevision=ep.revision;plan.summary='Scene plan derived from episode summary and script references; '+batches+' storyboard prompt(s) proposed.';
+plan.storyboards=Array.from({length:batches},(_,i)=>({id:'board-'+(i+1),name:'Storyboard '+(i+1),version:(plan.storyboards?.[i]?.version||0)+1,prompt:'Create one static PORTRAIT storyboard image with exactly FOUR sequential panels for '+ep.title+'. Visual beats: '+(beats.slice(i*4,i*4+4).join('; ')||ep.summary||'opening scene')+'. Preserve established characters, outfits, places and visual style. No text balloons unless explicitly requested.'}));
+v.episodePlans[ep.id]=plan;v.sceneTab='storyboards';render();return;
+}
+if(act==='v31-board-revise'){const plan=v.episodePlans?.[v.preparedEpisodeId],p=plan?.storyboards?.[Number(val)];if(p){p.version++;p.prompt+=' Refine composition and continuity while keeping four portrait storyboard panels.';}render();return;}
+if(act==='v31-prepare-generation'){notify('Generation request preview only. No AI provider called or image generated.');return;}
 if(act==='v31-scene-tab'){v.space='scene';v.panel='space';v.sceneTab=val;render();return;}
 if(act==='v31-open-scene'){v.space='scene';v.panel='space';v.sceneTab=val||'scenes';render();return;}
 if(act==='v31-webtoon-preview'){if(!v.storyboards.length){notify('Create a storyboard first.');return;}v.webtoonImages=[{id:'demo-image',panels:4}];render();return;}
 if(act==='v31-split-demo'){if(!(v.webtoonImages||[]).length)return;v.webtoonPanels=[1,2,3,4].map(i=>({id:'panel-'+i}));render();return;}
 if(act==='v31-balloon-demo'){if(!(v.webtoonPanels||[]).length)return;v.balloonDraft=true;render();return;}
-if(act==='v31-panel'){if(['splitter','balloons'].includes(val)&&v.mode!=='webtoon')return;v.panel=val;render();return;}
+if(act==='v31-panel'){if(val==='clips'){v.space='scene';v.panel='space';v.sceneTab='clipplans';render();return;}if(['splitter','balloons'].includes(val)&&v.mode!=='webtoon')return;v.panel=val;render();return;}
 
 
 if(act==='v31-entity-create'){
